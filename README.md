@@ -47,11 +47,11 @@ Infra:
 - **Docker**
 - **Gradle** versão 6.6.1
 - **Java** 17 ou superior
-- **Kubectl** versão 5.0.1 ou superior
 
 ## 🚀 Quick Start
 - Rodar usando o Docker:
     - Em cada serviço execute o comando abaixo para subir as app's, os bancos de dados e o rabbitMQ
+      (necessário subir primeiro o customer-totem, por conta da network compartilhada dos containers)
         - `$ docker-compose up`
     - Lembre-se de ter as seguintes portas disponiveis: Serviços (80, 81, 82, 83), Postgres (5432, 5433, 5434, 5435) e RabbitMQ (5672, 15672)
 
