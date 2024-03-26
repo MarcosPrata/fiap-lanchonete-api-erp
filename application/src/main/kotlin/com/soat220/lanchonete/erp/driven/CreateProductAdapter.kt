@@ -19,8 +19,8 @@ class CreateProductAdapter(
 ) : CreateProductPort {
     override fun execute(product: DomainProduct): Result<DomainProduct, DomainException> {
 
-        try {
-            productRepository.save(Product.fromDomain(product))
+        return try {
+            Success(productRepository.save(Product.fromDomain(product)).toDomain())
         } catch (e: Exception) {
             return Failure(
                 CreateProductException(
@@ -29,7 +29,5 @@ class CreateProductAdapter(
                 )
             )
         }
-
-        return Success(product)
     }
 }
