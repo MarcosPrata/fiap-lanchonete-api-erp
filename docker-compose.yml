@@ -1,17 +1,20 @@
 version: '3'
 
 services:
-  app:
-    container_name: "lanchonete_api"
+  erp:
+    container_name: "erp"
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      DB_URL: jdbc:postgresql://postgres:5432/lanchonete
+      DB_URL: jdbc:postgresql://fiap-lanchonete-api-erp-postgres-1:5435/erp
+      SERVER_PORT: 83
     ports:
-      - "80:80"
+      - "83:83"
     depends_on:
       - postgres
+    networks:
+      - fiap-lanchonete-api-customer-totem_shared
 
   postgres:
     image: postgres
@@ -19,6 +22,15 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
-      POSTGRES_DB: lanchonete
+      POSTGRES_DB: erp
+    expose:
+      - "5435"
     ports:
-      - "5432:5432"
+      - "5435:5435"
+    command: -p 5435
+    networks:
+      - fiap-lanchonete-api-customer-totem_shared
+
+networks:
+  fiap-lanchonete-api-customer-totem_shared:
+    external: true
